@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unitree Official Website</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* --- PROFESSIONAL DESIGN REFRESH --- */
+        :root {
+            --font-primary: 'Inter', sans-serif;
+            --color-text: #2d3436;
+            --color-text-light: #636e72;
+            --color-background: #ffffff;
+            --color-dark-bg: #111111;
+            --color-light-gray: #f7f8fa;
+            --color-border: #dfe6e9;
+            --color-sale-red: #d63031;
+            --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.06);
+            --shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-primary);
+            font-size: 16px;
+            color: var(--color-text);
+            background-color: var(--color-background);
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- HEADER & NAVIGATION --- */
+        .top-bar {
+            background-color: #000;
+            color: #ccc;
+            font-size: 12px;
+            padding: 8px 0;
+        }
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .main-header {
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--color-border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .main-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+        .header-logo img {
+            height: 50px;
+            width: auto;
+        }
+        .main-nav ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+        }
+        .main-nav li {
+            margin: 0 15px;
+        }
+        .main-nav a {
+            position: relative;
+            display: block;
+            padding: 25px 0;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-text-light);
+            transition: color 0.3s;
+        }
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 18px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--color-text);
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.3s ease-out;
+        }
+        .main-nav a:hover, .main-nav .active a {
+            color: var(--color-text);
+        }
+        .main-nav a:hover::after, .main-nav .active a::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+        .header-icons {
+            display: flex;
+            align-items: center;
+        }
+        .header-icons a {
+            display: inline-block;
+            line-height: 1;
+        }
+        .header-icons svg {
+            margin-left: 20px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            color: var(--color-text-light);
+            transition: color 0.3s;
+        }
+        .header-icons svg:hover {
+            color: var(--color-text);
+        }
+        #mobile-menu-toggle {
+            display: none;
+            font-size: 28px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* --- HERO SLIDER --- */
+        .hero-slider {
+            position: relative;
+            width: 100%;
+            height: 85vh;
+            overflow: hidden;
+            background-color: #333;
+        }
+        .slide {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        .slide.active { opacity: 1; }
+        .slide-content { max-width: 800px; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        .slide h1 { font-size: 4.5rem; font-weight: 800; margin: 0; }
+        .slide h2 { font-size: 1.5rem; margin: 10px 0 30px; font-weight: 400; }
+        .slide .price { display: flex; align-items: center; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        .slide .price-current {
+            font-size: 3rem; font-weight: 700;
+            background: linear-gradient(90deg, #aa33ff, #22aaff);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .slide .price del { font-size: 2rem; color: #ffffff99; font-weight: 400; }
+        .sale-badge {
+            background-color: var(--color-sale-red);
+            color: white; padding: 5px 12px; border-radius: 6px;
+            font-size: 0.9rem; font-weight: 700;
+        }
+        .slide .shop-now-btn {
+            display: inline-block; background-color: white; color: black;
+            padding: 15px 40px; border-radius: 8px; font-weight: 700;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .shop-now-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.25); }
+        #slide1 { background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://i.ibb.co/MDPx53hh/ca48e088128e4a3cbbee87dbe03dd131-3840x2160.jpg'); }
+        #slide2 { background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('https://i.ibb.co/Tqnxw7Df/25-1024x10245e00.jpg'); }
+        .slider-nav {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            width: 95%; left: 2.5%; display: flex; justify-content: space-between;
+        }
+        .slider-nav button {
+            background: rgba(0,0,0,0.3); border: none; color: white;
+            width: 50px; height: 50px; border-radius: 50%;
+            cursor: pointer; font-size: 24px; transition: background-color 0.3s;
+        }
+        .slider-nav button:hover { background: rgba(0,0,0,0.6); }
+
+        /* --- SECTION STYLES --- */
+        .section { padding: 100px 0; text-align: center; }
+        .section-title { font-size: 2.8rem; margin-bottom: 60px; font-weight: 800; }
+        .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: stretch; text-align: left; }
+        .product-card {
+            background-color: var(--color-background);
+            border: 1px solid var(--color-border);
+            padding: 30px; border-radius: 12px;
+            display: flex; flex-direction: column;
+            justify-content: space-between; height: 100%;
+            box-shadow: var(--shadow-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-medium);
+        }
+        .product-card img {
+            width: 100%; max-width: 300px; height: 280px;
+            object-fit: contain; margin-bottom: 20px;
+            display: block; margin-left: auto; margin-right: auto;
+        }
+        .product-card h3 { font-size: 2rem; margin: 0 0 15px 0; font-weight: 700; }
+        .product-card p { line-height: 1.7; color: var(--color-text-light); flex-grow: 1; }
+        .product-price-container { margin: 20px 0; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+        .product-price-container .price-current { font-size: 1.6rem; font-weight: 700; color: var(--color-sale-red); }
+        .product-price-container del { color: var(--color-text-light); font-size: 1rem; }
+        .product-btn-wrapper { text-align: center; margin-top: 15px; }
+        .product-btn {
+            display: inline-block; border: 1px solid #000;
+            background-color: #000; color: #fff;
+            padding: 10px 30px; border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .product-btn:hover { background-color: #333; transform: scale(1.05); }
+
+        /* --- VIDEO & STORY SECTIONS --- */
+        .video-section { background-color: var(--color-light-gray); }
+        .video-embed-container {
+            position: relative; overflow: hidden; width: 100%;
+            padding-top: 56.25%; border-radius: 12px;
+            box-shadow: var(--shadow-medium);
+        }
+        .video-embed-container iframe { position: absolute; top: 0; left: 0; bottom: 0; right: 0; width: 100%; height: 100%; border: none; }
+        .story-section .container { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; text-align: left; }
+        .story-section img { width: 100%; border-radius: 12px; }
+        
+        /* --- BLOG & BRANDS --- */
+        .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; text-align: left; }
+        .blog-post { display: block; overflow: hidden; border-radius: 12px; box-shadow: var(--shadow-light); transition: all 0.3s ease; }
+        .blog-post:hover { transform: translateY(-8px); box-shadow: var(--shadow-medium); }
+        .blog-post img {
+            width: 100%; height: 200px; object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        .blog-post:hover img { transform: scale(1.05); }
+        .blog-post-content { padding: 25px; }
+        .blog-post h4 { font-size: 1.2rem; margin: 0 0 10px 0; font-weight: 700; }
+        .blog-post p { font-size: 0.9rem; color: var(--color-text-light); line-height: 1.6; }
+        .brands-section { background-color: var(--color-light-gray); }
+        .brands-desktop { display: block; width: 100%; max-width: 1100px; margin: 0 auto; }
+        .brands-mobile { display: none; width: 100%; max-width: 400px; margin: 0 auto; }
+
+        /* --- FOOTER --- */
+        .pre-footer { border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
+        .pre-footer .container { display: grid; grid-template-columns: repeat(4, 1fr); }
+        .pre-footer-item-link { display: block; text-decoration: none; color: inherit; }
+        .pre-footer-item { padding: 30px; text-align: center; transition: background-color 0.3s; }
+        .pre-footer-item-link:hover .pre-footer-item { background-color: var(--color-light-gray); }
+        .pre-footer-item svg { width: 30px; height: 30px; margin-bottom: 15px; stroke-width: 1.5; color: var(--color-text); }
+        .main-footer {
+            background-color: var(--color-dark-bg); color: #aaa;
+            padding: 80px 0 30px 0; font-size: 14px;
+        }
+        .main-footer .container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-bottom: 50px; }
+        .footer-col h5 { color: white; font-size: 16px; margin: 0 0 20px 0; font-weight: 700; }
+        .footer-col ul { list-style: none; padding: 0; margin: 0; }
+        .footer-col li { margin-bottom: 12px; }
+        .footer-col a { transition: color 0.3s; }
+        .footer-col a:hover { color: white; }
+        .footer-bottom { border-top: 1px solid #333; padding-top: 30px; text-align: center; font-size: 12px; }
+        
+        /* --- CHAT WIDGET --- */
+        .chat-widget-link { position: fixed; bottom: 25px; right: 25px; z-index: 1001; text-decoration: none; }
+        .chat-widget {
+            background-color: #1a1a1a; color: white;
+            padding: 12px 20px; border-radius: 50px;
+            display: flex; align-items: center; cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            font-weight: 500;
+            transition: transform 0.3s;
+        }
+        .chat-widget-link:hover .chat-widget { transform: scale(1.05); }
+        .chat-widget span { margin-right: 10px; }
+
+        /* --- MOBILE OPTIMIZATION --- */
+        @media (max-width: 992px) {
+            .main-nav {
+                display: none; position: absolute; top: 70px;
+                left: 0; width: 100%; background-color: white;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            }
+            .main-nav.show-menu { display: block; }
+            .main-nav ul { flex-direction: column; align-items: center; width: 100%; }
+            .main-nav li { width: 100%; text-align: center; border-bottom: 1px solid var(--color-border); }
+            .main-nav a { padding: 15px 0; }
+            .main-nav a::after { display: none; }
+            #mobile-menu-toggle { display: block; }
+            .header-icons { gap: 15px; }
+            .header-icons svg { margin-left: 0; }
+            
+            .slide h1 { font-size: 2.8rem; }
+            .slide h2 { font-size: 1.2rem; }
+            .slide .price-current { font-size: 2.2rem; }
+            .slide .price del { font-size: 1.6rem; }
+
+            .section { padding: 80px 0; }
+            .section-title { font-size: 2.2rem; margin-bottom: 40px; }
+            .product-grid, .story-section .container, .blog-grid, .main-footer .container { grid-template-columns: 1fr; }
+            .story-section .container { gap: 30px; }
+            .story-section img { margin-bottom: 20px; }
+            .footer-col { text-align: center; margin-bottom: 30px; }
+            .pre-footer .container { grid-template-columns: 1fr 1fr; }
+            .brands-desktop { display: none; }
+            .brands-mobile { display: block; }
+            #slide1 { background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://i.ibb.co/v4QDD2cC/t1-01-c143e634-0606-4f01-ab2e-ebb67e0c7de8-1024x10246444.jpg'); }
+            #slide2 { background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('https://i.ibb.co/ch8w8wP9/29-1024x1024a940.jpg'); }
+        }
+        
+        @media (max-width: 600px) {
+            .top-bar .container { flex-direction: column; gap: 5px; }
+            .pre-footer .container { grid-template-columns: 1fr; }
+            .chat-widget { padding: 8px 15px; font-size: 14px; }
+            .product-card { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <script>
+        const WHATSAPP_LINK = "https://wa.me/12525708610?text=Hello%20Unitree%20Support%20Team,%20I%20would%20like%20to%20inquire%20about%20purchasing%20your%20products..";
+    </script>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <span>Unitree Official Website</span>
+            <div>
+                <a href="javascript:void(0)" onclick="window.location.href=WHATSAPP_LINK" style="margin-right: 20px;">Help & FAQs</a>
+                <a href="javascript:void(0)" onclick="window.location.href=WHATSAPP_LINK">USD $</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-logo">
+                <a href="javascript:void(0)" onclick="window.location.href=WHATSAPP_LINK"><img src="https://shop.unitree.com/cdn/shop/files/1_1_180x.png" alt="Unitree Logo"></a>
+            </div>
+            <nav class="main-nav" id="main-nav-menu">
+                <ul>
+                    <li class="active"><a href="javascript:void(0)" onclick="window.location.href=WHATSAPP_LINK">Home</a></li>
+                    <li><a href="javascript:void(0)" onclick="window.location.href=WHATSAPP_LINK">Professional</a></li>
+                    <li><a href="javascript:void(0)" onclick="window.location.href=WHATSAPP_LINK">Education & Industry</a></li>
+                    <li><a href="javascript:void(0)" onclick="window.location.href=WHATSAPP_LINK">Humanoid Robot</a></li>
+                    <li><a href="javascript:void(0)" onclick="window.location.href=WHATSAPP_LINK">Accessories</a></li>
+                    <li><a href="javascript:void(0)" onclick="window.location.href=WHATSAPP_LINK">Contact</a></li>
+                    <li><a href="javascript:void(0)" onclick="window.location.href=WHATSAPP_LINK">Disclaimer</a></li>
+                    <li><a href="javascript:void(0)" onclick="window.location.href=WHATSAPP_LINK">Uni</a></li>
+                </ul>
+            </nav>
+            <div class="header-icons">
+                <a href="javascript:void(0)" onclick="window.location.href=WHATSAPP_LINK">
+                    <svg xmlns="http://www.w3.org/2000/svg" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                </a>
+                 <a href="javascript:void(0)" onclick="window.location.href=WHATSAPP_LINK">
+                    <svg xmlns="http://www.w3.org/2000/svg" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                </a>
+                <a href="javascript:void(0)" onclick="window.location.href=WHATSAPP_LINK">
+                    <svg xmlns="http://www.w3.org/2000/svg" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                </a>
+                <button id="mobile-menu-toggle">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Slider Section -->
+        <section class="hero-slider">
+            <div id="slide1" class="slide active">
+                <div class="slide-content">
+                    <h1>Unitree G1</h1>
+                    <h2>Humanoid agent AI avatar</h2>
+                    <div class="price">
+                        <span class="price-current">from $6K</span>
+                        <del>$16K</del>
+                        <span class="sale-badge">62.5% OFF</span>
+                    </div>
+                </div>
+            </div>
+            <div id="slide2" class="slide">
+                <div class="slide-content">
+                    <h1>Unitree Go2</h1>
+                    <h2>New Creature of Embodied AI</h2>
+                    <a href="javascript:void(0)" onclick="window.location.href=WHATSAPP_LINK" class="shop-now-btn">Shop Now</a>
+                </div>
+            </div>
+            <div class="slider-nav">
+                <button id="prevBtn">&lt;</button>
+                <button id="nextBtn">&gt;</button>
+            </div>
+        </section>
+
+        <!-- Hot Products Section -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Hot Products</h2>
+                <div class="product-grid">
+                    <div class="product-card">
+                        <div>
+                            <img src="https://shop.unitree.com/cdn/shop/files/df9f333424ff6cc6164ce421b019fb94_300x.png" alt="Unitree Go2">
+                            <h3>Unitree Go2</h3>
+                            <p>In the spirit of technical innovation and industrial leadership, Unitree is coming back! With standard 4D Ultra-wide LiDAR and big model GPT empowerment, a new creature of embodied AI—Unitree Go2 joins you to explore the future world!</p>
+                            <div class="product-price-container">
+                                <span class="price-current">$1,400.00 USD</span>
+                                <del>$2,800.00 USD</del>
+                                <span class="sale-badge">50% OFF</span>
+                            </div>
+                        </div>
+                        <div class="product-btn-wrapper">
+                             <a href="javascript:void(0)" onclick="window.location.href=WHATSAPP_LINK" class="product-btn">Order Now</a>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div>
+                            <img src="https://shop.unitree.com/cdn/shop/files/1_968fd08b-9aaf-4f32-b895-5c786285ee52_300x.jpg" alt="Unitree G1">
+                            <h3>Unitree G1</h3>
+                            <p>Unlock unlimited sports potential (Extra large joint movement space angle, 23-43 joints). Force control of dexterous hands, manipulation of all things. Robot world model, let's create it together.</p>
+                             <div class="product-price-container">
+                                <span class="price-current">$6,000.00 USD</span>
+                                <del>$16,000.00 USD</del>
+                                <span class="sale-badge">62.5% OFF</span>
+                            </div>
+                        </div>
+                        <div class="product-btn-wrapper">
+                            <a href="javascript:void(0)" onclick="window.location.href=WHATSAPP_LINK" class="product-btn">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div>
+                            <img src="https://shop.unitree.com/cdn/shop/files/1_62a8280b-ab6b-4273-b3cd-7b2b24a4070d_300x.jpg" alt="Unitree B2">
+                            <h3>Unitree B2</h3>
+                            <p>Industrial Level Heavy Loader. Great application potential in agriculture, industry, specific security patrols, surveys and exploration. 170% increase in joint performance with 360 N.m of torque.</p>
+                             <div class="product-price-container">
+                                <span class="price-current">$19,000.00 USD</span>
+                                <del>$100,000.00 USD</del>
+                                <span class="sale-badge">81% OFF</span>
+                            </div>
+                        </div>
+                        <div class="product-btn-wrapper">
+                            <a href="javascript:void(0)" onclick="window.location.href=WHATSAPP_LINK" class="product-btn">Contact us</a>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div>
+                            <img src="https://shop.unitree.com/cdn/shop/files/4_39075296-5418-4852-8c60-79f3cae9c0d7_300x.jpg?v=1741247048" alt="Unitree H1">
+                            <h3>Unitree H1</h3>
+                            <p>Unitree's first universal humanoid robot. Highest power performance in the world's approximate specifications. The advanced powertrain provides the highest level of speed, power, and flexibility.</p>
+                             <div class="product-price-container">
+                                <span class="price-current">$12,000.00 USD</span>
+                                <del>$90,000.00 USD</del>
+                                <span class="sale-badge">87% OFF</span>
+                            </div>
+                        </div>
+                        <div class="product-btn-wrapper">
+                            <a href="javascript:void(0)" onclick="window.location.href=WHATSAPP_LINK" class="product-btn">Shop Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Video Section -->
+        <section class="section video-section">
+            <div class="container">
+                <h2 class="section-title">Daily Training of Robots Driven by RL</h2>
+                <div class="video-embed-container">
+                    <iframe src="https://www.youtube.com/embed/8ClYBtfhkaw?si=BHzwxH5JS9OYuV5Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- Story Section -->
+        <section class="section story-section">
+            <div class="container">
+                <div>
+                    <img src="https://i.ibb.co/vn1J70N/Uni-1024x1024f165.jpg" alt="Our Story">
+                </div>
+                <div>
+                    <h2 class="section-title" style="text-align: left; margin-bottom: 20px;">Our Story</h2>
+                    <p style="color: var(--color-text-light); line-height: 1.7;">Unitree Robotics is a world-renowned robotics company focusing on independent research and development, production and sales of consumer-grade and industry-grade high-performance quadruped robots and dexterous robotic arms. We are the first company in the world to openly retail high-performance quadruped robots, and its sales have been leading in the world over the years.</p>
+                    <a href="javascript:void(0)" onclick="window.location.href=WHATSAPP_LINK" class="product-btn">Learn More</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Posts Section -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Blog posts</h2>
+                <div class="blog-grid">
+                    <a href="javascript:void(0)" onclick="window.location.href=WHATSAPP_LINK" class="blog-post">
+                        <img src="https://shop.unitree.com/cdn/shop/articles/pcen_01_720x.png" alt="H1 Debut">
+                        <div class="blog-post-content">
+                            <h4>Unitree H1: Humanoid Robot Makes Its Debut at the Spring Festival Gala</h4>
+                            <p>Hello everyone, let me introduce myself again. I am Unitree H1 "Fuxi". I am now a comedian at the Spring Festival Gala, hoping to bring joy to everyone.</p>
+                        </div>
+                    </a>
+                    <a href="javascript:void(0)" onclick="window.location.href=WHATSAPP_LINK" class="blog-post">
+                        <img src="https://shop.unitree.com/cdn/shop/articles/Unitree_B2_720x.jpg" alt="B2 Release">
+                        <div class="blog-post-content">
+                           <h4>Unitree Robotics Releases Industrial Quadruped Robot B2, Breaking Through Limits</h4>
+                            <p>HANGZHOU, China, Dec. 12, 2023 /PRNewswire/ -- On November 3, Unitree Robotics released the new industrial quadruped robot B2.</p>
+                        </div>
+                    </a>
+                    <a href="javascript:void(0)" onclick="window.location.href=WHATSAPP_LINK" class="blog-post">
+                        <img src="https://shop.unitree.com/cdn/shop/articles/2c7a34c1dd78714a311d234ada71_720x.jpg" alt="ICRA 2023">
+                        <div class="blog-post-content">
+                            <h4>Unitree Robotics B-W Wheel-Legged Robot Showcased at ICRA 2023 London</h4>
+                            <p>Unitree Robotics participated in ICRA for the sixth consecutive year. Unitree Robotics exhibited Go1, B1, A1, and other quadruped robots at ICRA.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cooperated Brands Section -->
+        <section class="section brands-section">
+            <div class="container">
+                <h2 class="section-title">Cooperated Brands</h2>
+                <img class="brands-desktop" src="https://i.ibb.co/4ZRPvggh/image.png" alt="Cooperating Brands Logos for Desktop">
+                <img class="brands-mobile" src="https://i.ibb.co/C5715Pr1/4ab06d5d0fae9e3779190a5378aa9b02-720x.webp" alt="Cooperating Brands Logos for Mobile">
+            </div>
+        </section>
+    </main>
+    
+    <!-- Pre-Footer -->
+    <section class="pre-footer">
+        <div class="container">
+            <a href="javascript:void(0)" onclick="window.location.href=WHATSAPP_LINK" class="pre-footer-item-link">
+                <div class="pre-footer-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                    <h4>Professional Service</h4>
+                </div>
+            </a>
+            <a href="javascript:void(0)" onclick="window.location.href=WHATSAPP_LINK" class="pre-footer-item-link">
+                <div class="pre-footer-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    <h4>Custom Robots</h4>
+                </div>
+            </a>
+            <a href="javascript:void(0)" onclick="window.location.href=WHATSAPP_LINK" class="pre-footer-item-link">
+                <div class="pre-footer-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20z"/><path d="M12 18a6 6 0 0 0 0-12v0a6 6 0 0 0 0 12v0zM2 12h2M20 12h2"/><path d="M12 2a6 6 0 0 0-6 6v0a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v0a6 6 0 0 0-6-6zM12 2v2M12 20v2"/></svg>
+                    <h4>Tech Support</h4>
+                </div>
+            </a>
+            <a href="javascript:void(0)" onclick="window.location.href=WHATSAPP_LINK" class="pre-footer-item-link">
+                <div class="pre-footer-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    <h4>Official Website</h4>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Main Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-col">
+                <h5>INFO</h5>
+                <ul>
+                    <li><a href="javascript:void(0)" onclick="window.location.href=WHATSAPP_LINK">About Us</a></li>
+                    <li><a href="javascript:void(0)" onclick="window.location.href=WHATSAPP_LINK">Disclaimer</a></li>
+                    <li><a href="javascript:void(0)" onclick="window.location.href=WHATSAPP_LINK">Blog</a></li>
+                    <li><a href="javascript:void(0)" onclick="window.location.href=WHATSAPP_LINK">FAQ</a></li>
+                    <li><a href="javascript:void(0)" onclick="window.location.href=WHATSAPP_LINK">Contact Us</a></li>
+                    <li><a href="javascript:void(0)" onclick="window.location.href=WHATSAPP_LINK">Become A Distributor</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h5>SERVICE</h5>
+                <ul>
+                    <li><a href="javascript:void(0)" onclick="window.location.href=WHATSAPP_LINK">Privacy Policy</a></li>
+                    <li><a href="javascript:void(0)" onclick="window.location.href=WHATSAPP_LINK">About Payment</a></li>
+                    <li><a href="javascript:void(0)" onclick="window.location.href=WHATSAPP_LINK">Shipping Policy</a></li>
+                    <li><a href="javascript:void(0)" onclick="window.location.href=WHATSAPP_LINK">Terms of Service</a></li>
+                    <li><a href="javascript:void(0)" onclick="window.location.href=WHATSAPP_LINK">Return & Refund Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h5>Contact Us</h5>
+                <p>Business Name: Unitree Robotics</p>
+                <p>Address: 3rd Floor, Building 1, Fengda Creative Park, Hangzhou City, Zhejiang Province, China</p>
+                <p>Phone: +12525708610</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 UnitreeRobotics. Powered by Shopify</p>
+        </div>
+    </footer>
+
+    <!-- Floating Chat Widget -->
+    <a href="javascript:void(0)" onclick="window.location.href=WHATSAPP_LINK" class="chat-widget-link">
+        <div class="chat-widget">
+            <span>Chat with us</span> 👋
+        </div>
+    </a>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- HERO SLIDER SCRIPT ---
+            const slides = document.querySelectorAll('.hero-slider .slide');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            let currentSlide = 0;
+            let slideInterval;
+
+            function showSlide(index) {
+                if (slides.length === 0) return;
+                if (index >= slides.length) {
+                    currentSlide = 0;
+                } else if (index < 0) {
+                    currentSlide = slides.length - 1;
+                } else {
+                    currentSlide = index;
+                }
+                slides.forEach(slide => slide.classList.remove('active'));
+                slides[currentSlide].classList.add('active');
+            }
+
+            function nextSlide() { showSlide(currentSlide + 1); }
+            function startSlideShow() { slideInterval = setInterval(nextSlide, 5000); }
+            function stopSlideShow() { clearInterval(slideInterval); }
+
+            if (nextBtn && prevBtn) {
+                nextBtn.addEventListener('click', () => { nextSlide(); stopSlideShow(); startSlideShow(); });
+                prevBtn.addEventListener('click', () => { showSlide(currentSlide - 1); stopSlideShow(); startSlideShow(); });
+            }
+            startSlideShow();
+
+            // --- MOBILE MENU TOGGLE SCRIPT ---
+            const menuToggleBtn = document.getElementById('mobile-menu-toggle');
+            const mainMenu = document.getElementById('main-nav-menu');
+            if (menuToggleBtn && mainMenu) {
+                menuToggleBtn.addEventListener('click', function () {
+                    mainMenu.classList.toggle('show-menu');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
